@@ -29,6 +29,7 @@ requirements:
     - pybind11                               # [build_platform != target_platform]
   host:
     - pip
+    - setuptools
     - python
     - pybind11
     - eigen
