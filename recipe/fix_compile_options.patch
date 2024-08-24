@@ -1,8 +1,8 @@
 diff --git a/pybind/CMakeLists.txt b/pybind/CMakeLists.txt
-index 923a6da..7864925 100644
+index 923a6da..1ee52dd 100644
 --- a/pybind/CMakeLists.txt
 +++ b/pybind/CMakeLists.txt
-@@ -9,8 +9,4 @@ pybind11_add_module(pyposelib MODULE pyposelib.cc)
+@@ -9,8 +9,9 @@ pybind11_add_module(pyposelib MODULE pyposelib.cc)
  target_link_libraries(pyposelib PUBLIC PoseLib::PoseLib Eigen3::Eigen)
  target_compile_features(pyposelib PRIVATE cxx_std_17)
  set_target_properties(pyposelib PROPERTIES OUTPUT_NAME poselib)
@@ -12,6 +12,11 @@ index 923a6da..7864925 100644
 -    target_compile_options(pyposelib PRIVATE -Wall -Werror -fPIC)
 -endif()
 +target_compile_options(pyposelib PRIVATE -fPIC)
++
++install(TARGETS pyposelib
++        LIBRARY DESTINATION "lib/python${Python_VERSION_MAJOR}.${Python_VERSION_MINOR}/site-packages"
++        ARCHIVE DESTINATION "lib"
++        RUNTIME DESTINATION "bin")
 diff --git a/CMakeLists.txt b/CMakeLists.txt
 index 68e8e53..0c9e907 100644
 --- a/CMakeLists.txt
