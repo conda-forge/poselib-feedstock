@@ -15,8 +15,6 @@ source:
 
 build:
   number: 0
-  script:
-    - {{ PYTHON }} -m pip install . -vv --no-build-isolation
 
 requirements:
   build:
