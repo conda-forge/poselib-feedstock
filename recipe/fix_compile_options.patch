@@ -12,13 +12,13 @@ index 923a6da..6b4f1c1 100644
 +
 +if(WIN32)
 +    install(TARGETS pyposelib
-+            LIBRARY DESTINATION "lib/python${Python_VERSION_MAJOR}.${Python_VERSION_MINOR}/site-packages"
++            LIBRARY DESTINATION "$ENV{PREFIX}/Lib/site-packages"
 +            ARCHIVE DESTINATION "lib"
 +            RUNTIME DESTINATION "bin")
  else()
 -    target_compile_options(pyposelib PRIVATE -Wall -Werror -fPIC)
 +    install(TARGETS pyposelib
-+            LIBRARY DESTINATION "Lib/site-packages"
++            LIBRARY DESTINATION "lib/python${Python_VERSION_MAJOR}.${Python_VERSION_MINOR}/site-packages"
 +            ARCHIVE DESTINATION "lib"
 +            RUNTIME DESTINATION "bin")
  endif()
