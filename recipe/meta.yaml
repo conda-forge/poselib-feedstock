@@ -14,7 +14,7 @@ source:
       - fix_compile_options.patch
 
 build:
-  number: 1
+  number: 2
 
 requirements:
   build:
@@ -42,6 +42,12 @@ test:
     - poselib
   commands:
     - pip check
+    - if not exist %PREFIX%\\Library\\lib\\PoseLib.lib exit 1  # [win]
+    - if not exist %PREFIX%\\Library\\lib\\cmake\\PoseLib\\PoseLibConfig.cmake exit 1  # [win]
+    - if not exist %PREFIX%\\Library\\include\\PoseLib\\poselib.h exit 1  # [win]
+    - test -f ${PREFIX}/lib/libPoseLib${SHLIB_EXT}  # [unix]
+    - test -f ${PREFIX}/include/PoseLib/poselib.h  # [unix]
+    - test -f ${PREFIX}/lib/cmake/PoseLib/PoseLibConfig.cmake  # [unix]
   requires:
     - pip
 
