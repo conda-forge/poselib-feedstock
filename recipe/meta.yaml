@@ -14,9 +14,7 @@ source:
       - fix_compile_options.patch
 
 build:
-  number: 0
-  script:
-    - {{ PYTHON }} -m pip install . -vv --no-build-isolation
+  number: 1
 
 requirements:
   build:
@@ -31,6 +29,7 @@ requirements:
     - pybind11                               # [build_platform != target_platform]
   host:
     - pip
+    - setuptools
     - python
     - pybind11
     - eigen
