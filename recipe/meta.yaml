@@ -14,7 +14,7 @@ source:
       - fix_compile_options.patch
 
 build:
-  number: 3
+  number: 4
   run_exports:
     - {{ pin_subpackage('poselib', max_pin='x.x.x') }}
 
