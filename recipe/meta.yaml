@@ -29,6 +29,7 @@ requirements:
     - cross-python_{{ target_platform }}     # [build_platform != target_platform]
     - pybind11                               # [build_platform != target_platform]
     - pybind11-stubgen                       # [build_platform != target_platform]
+    - numpy                                  # [build_platform != target_platform]
   host:
     - pip
     - setuptools
@@ -36,6 +37,7 @@ requirements:
     - pybind11
     - pybind11-stubgen
     - eigen
+    - numpy
   run:
     - python
     - numpy
