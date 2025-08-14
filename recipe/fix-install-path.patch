@@ -14,3 +14,18 @@ index bdd41c3..ce6d65d 100644
  
  if(GENERATE_STUBS)
      message(STATUS "Enabling stubs generation")
+diff --git a/PoseLib/CMakeLists.txt b/PoseLib/CMakeLists.txt
+index 8342f2f..1ecc2ab 100644
+--- a/PoseLib/CMakeLists.txt
++++ b/PoseLib/CMakeLists.txt
+@@ -111,3 +111,10 @@ include(${PROJECT_SOURCE_DIR}/cmake/LibraryConfig.cmake)
+ 
+ # Eigen
+ target_link_libraries(${LIBRARY_NAME} Eigen3::Eigen)
++
++install(
++    TARGETS ${LIBRARY_NAME}
++    LIBRARY DESTINATION lib
++    ARCHIVE DESTINATION lib
++    RUNTIME DESTINATION bin
++)
