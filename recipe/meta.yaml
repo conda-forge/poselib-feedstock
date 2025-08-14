@@ -11,10 +11,11 @@ source:
     patches:
       - unvendor_pybind11.patch
       - fix_windows.patch
-      - fix-install-path.patch
+      # - fix-install-path.patch
 
 build:
   number: 0
+  script: python -m pip install . -vv --no-build-isolation
   run_exports:
     - {{ pin_subpackage('poselib', max_pin='x.x.x') }}
 
