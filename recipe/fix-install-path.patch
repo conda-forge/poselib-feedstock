@@ -1,0 +1,29 @@
+diff --git a/pybind/CMakeLists.txt b/pybind/CMakeLists.txt
+index bdd41c3..ce6d65d 100644
+--- a/pybind/CMakeLists.txt
++++ b/pybind/CMakeLists.txt
+@@ -13,7 +13,10 @@ set_target_properties(pyposelib PROPERTIES OUTPUT_NAME _core)
+ set_compile_flags(pyposelib)
+ 
+ # Install the compiled module
+-install(TARGETS pyposelib LIBRARY DESTINATION . COMPONENT python)
++install(
++    TARGETS pyposelib
++    LIBRARY DESTINATION ${Python_SITEARCH}/pyposelib COMPONENT python
++)
+ 
+ if(GENERATE_STUBS)
+     message(STATUS "Enabling stubs generation")
+diff --git a/setup.py b/setup.py
+index fc69e0a..c2bad39 100644
+--- a/setup.py
++++ b/setup.py
+@@ -36,7 +36,7 @@ def build_extension(self, ext):
+         cmake_args = ['-DPYTHON_EXECUTABLE=' + sys.executable,
+                       '-DPython_EXECUTABLE=' + sys.executable,
+                       '-DPYTHON_PACKAGE=ON',
+-                      '-DBUILD_SHARED_LIBS=OFF',]
++                      '-DBUILD_SHARED_LIBS=ON',]
+         if os.environ.get('CMAKE_INSTALL_PREFIX') is not None:
+             cmake_args += [f"-DCMAKE_INSTALL_PREFIX={os.environ.get('CMAKE_INSTALL_PREFIX')}"]
+         else:
