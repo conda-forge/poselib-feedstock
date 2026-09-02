@@ -1,0 +1,85 @@
+schema_version: 1
+
+context:
+  name: poselib
+  version: "2.0.5"
+
+package:
+  name: ${{ name }}
+  version: ${{ version }}
+
+source:
+  - url: https://github.com/PoseLib/PoseLib/archive/refs/tags/v${{ version }}.tar.gz
+    sha256: a9493e6725c58e6ae541fe416c0a6179185a60006880ff3ddf32737a43695668
+    patches:
+      - unvendor_pybind11.patch
+      - fix_windows.patch
+      - fix_unused_variable.patch
+      - fix_gcc_array_bounds.patch
+      - fix_cmake_args.patch
+      - backport_pr208_onesided_focal.patch
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - ${{ compiler('cxx') }}
+    - ${{ compiler('c') }}
+    - ${{ stdlib("c") }}
+    - cmake
+    - if: unix
+      then: make
+    - ninja
+    - if: build_platform != target_platform
+      then:
+        - python
+        - cross-python_${{ target_platform }}
+        - pybind11
+        - pybind11-stubgen
+        - numpy
+  host:
+    - pip
+    - setuptools
+    - python
+    - pybind11
+    - pybind11-stubgen
+    - eigen
+    - numpy
+  run:
+    - python
+    - numpy
+  run_exports:
+    - ${{ pin_subpackage('poselib', upper_bound='x.x.x') }}
+
+tests:
+  - python:
+      imports:
+        - poselib
+      pip_check: true
+  - requirements:
+      run:
+        - pip
+    script:
+      - if: win
+        then:
+          - if not exist %PREFIX%\\Library\\lib\\PoseLib.lib exit 1
+          -  if not exist %PREFIX%\\Library\\lib\\cmake\\PoseLib\\PoseLibConfig.cmake exit 1
+          -  if not exist %PREFIX%\\Library\\include\\PoseLib\\poselib.h exit 1
+      - if: unix
+        then:
+          - test -f ${PREFIX}/lib/libPoseLib${SHLIB_EXT}
+          - test -f ${PREFIX}/include/PoseLib/poselib.h
+          - test -f ${PREFIX}/lib/cmake/PoseLib/PoseLibConfig.cmake
+
+about:
+  license: BSD-3-Clause
+  license_file:
+    - LICENSE
+  summary: PoseLib provides a collection of minimal solvers for camera pose estimation.
+  homepage: https://github.com/PoseLib/PoseLib
+
+extra:
+  feedstock-name: poselib
+  recipe-maintainers:
+    - Tobias-Fischer

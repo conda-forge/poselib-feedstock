@@ -1,0 +1,12 @@
+diff --git a/PoseLib/misc/colmap_models.cc b/PoseLib/misc/colmap_models.cc
+index 1111111..2222222 100644
+--- a/PoseLib/misc/colmap_models.cc
++++ b/PoseLib/misc/colmap_models.cc
+@@ -640,7 +640,6 @@ void FullOpenCVCameraModel::unproject(const std::vector<double> &params, const
+                                       Eigen::Vector2d *x) {
+     Eigen::Vector2d xp0;
+     xp0 << (xp(0) - params[2]) / params[0], (xp(1) - params[3]) / params[1];
+-    Eigen::Vector2d x0;
+     *x = undistort_full_opencv(params[4], params[5], params[6], params[7], params[8], params[9], params[10], params[11],
+                                xp0);
+ }

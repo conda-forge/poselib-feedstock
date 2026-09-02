@@ -1,0 +1,13 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 0c9e907..1f2a3b5 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -12,7 +12,7 @@ else()
+ 	endif()
+ 	if (CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
+ 		target_compile_options(${build_target} PRIVATE
+-				-Wno-maybe-uninitialized)
++				-Wno-maybe-uninitialized -Wno-array-bounds -Wno-stringop-overflow)
+ 	endif()
+ endif()
+ target_compile_features(${build_target} PUBLIC cxx_std_17)
