@@ -20,7 +20,7 @@ source:
       - backport_pr208_onesided_focal.patch
 
 build:
-  number: 0
+  number: 1
 
 requirements:
   build:
@@ -64,8 +64,8 @@ tests:
       - if: win
         then:
           - if not exist %PREFIX%\\Library\\lib\\PoseLib.lib exit 1
-          -  if not exist %PREFIX%\\Library\\lib\\cmake\\PoseLib\\PoseLibConfig.cmake exit 1
-          -  if not exist %PREFIX%\\Library\\include\\PoseLib\\poselib.h exit 1
+          - if not exist %PREFIX%\\Library\\lib\\cmake\\PoseLib\\PoseLibConfig.cmake exit 1
+          - if not exist %PREFIX%\\Library\\include\\PoseLib\\poselib.h exit 1
       - if: unix
         then:
           - test -f ${PREFIX}/lib/libPoseLib${SHLIB_EXT}
